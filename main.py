@@ -1,12 +1,4 @@
-def left(i):
-    return 2 * i + 1
-
-
-def right(i):
-    return 2 * i + 2
-
-
-def Heapify(A, size, i):
+def heapify(A, size, i):
     largest = i
     l = left(i)
     r = right(i)
@@ -17,28 +9,30 @@ def Heapify(A, size, i):
         largest = r
     if i != largest:
         A[largest], A[i] = A[i], A[largest]
-        return Heapify(A, size, largest)
+        return heapify(A, size, largest)
     else:
         return A
 
-
-def build(A, size):
+def heapBuild(A, size):
     for i in range(size // 2, -1, -1):
-        A = Heapify(A, size, i)
+        A = heapify(A, size, i)
     return A
-
 
 def heapSort(A, size):
-    A = build(A, size)
+    A = heapBuild(A, size)
     for i in range(size - 1, 0, -1):
         A[0], A[i] = A[i], A[0]
-        A = Heapify(A, i, 0)
+        A = heapify(A, i, 0)
     return A
 
+def left(i):
+    return 2 * i + 1
+
+def right(i):
+    return 2 * i + 2
 
 def div():
     print("\n", "-" * 30, "\n")
-
 
 def main():
     examples = [
@@ -51,12 +45,11 @@ def main():
         size = len(example)
         print("start:", example)
 
-        wynik = build(example, size)
-        print("build:", wynik)
+        result = heapBuild(example, size)
+        print("build:", result)
 
-        wynik = heapSort(example, size)
-        print("heapsort:", wynik)
-
+        result = heapSort(example, size)
+        print("heapsort:", result)
         div()
 
 
